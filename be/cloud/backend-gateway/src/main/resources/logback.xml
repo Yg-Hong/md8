@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--            <Pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>-->
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+            <!--            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>-->
+        </layout>
+    </appender>
+
+    <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+        <encoder class="com.github.danielwegener.logback.kafka.encoding.LayoutKafkaMessageEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>%msg</Pattern>
+            </layout>
+        </encoder>
+        <topic>test_log</topic>
+        <producerConfig>bootstrap.servers=j10a208.p.ssafy.io:9092</producerConfig>
+
+        <!-- 패턴 기반 필터링 설정 -->
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator>
+                <expression>return message.contains("email");</expression>
+            </evaluator>
+            <OnMatch>ACCEPT</OnMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+    </appender>
+    <!-- Layout 1  :  kafkaAppender -->
+<!--    <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">-->
+<!--        <encoder class="com.github.danielwegener.logback.kafka.encoding.LayoutKafkaMessageEncoder">-->
+<!--            <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>-->
+<!--                &lt;!&ndash;                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>&ndash;&gt;-->
+<!--            </layout>-->
+<!--        </encoder>-->
+<!--        <topic>test_log1</topic>-->
+<!--        <producerConfig>bootstrap.servers=j10a208.p.ssafy.io:9092</producerConfig>-->
+<!--    </appender>-->
+
+    <!-- Async 한 KafkaAppender 추가 -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="kafkaAppender"/>
+    </appender>
+
+
+    <!-- logger -->
+    <logger name="org.apache.kafka" level="ERROR"/>
+    <logger name="com.minsub.java.logger.kafka" level="DEBUG">
+        <appender-ref ref="kafkaAppender"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <root level="info">
+        <appender-ref ref="ASYNC" />
+    </root>
+
+</configuration>

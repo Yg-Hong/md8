@@ -1,0 +1,73 @@
+{
+  "expo": {
+    "name": "문득",
+    "slug": "moondeuk",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "SCDream": ["./app/assets/fonts/SCDream5.oft"],
+          "Yeongju": ["./app/assets/fonts/YEONGJUSeonbi.ttf"]
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ],
+    "icon": "./app/assets/images/LogoBig.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ms8.md",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBsUi8pNlxZggwyz76-AUk49VmIpG4p1Lw"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.ms8.md",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCv6Enb_AAsAidkzcBIhNEo_dAHtlVgUCs"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "97e36f68-b4a6-4561-a45e-edcb3b3191fa"
+      }
+    },
+    "owner": "ignuy"
+  }
+}

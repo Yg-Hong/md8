@@ -1,0 +1,29 @@
+@baseurl = http://localhost:8080/api/users
+@userId = 1
+@ec2url = http://j10a208.p.ssafy.io:8443/api/users
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaG9peXViaW4xMEBuYXZlci5jb20iLCJpYXQiOjE3MTEwMDY0ODQsImV4cCI6MTcxMTAwNzA4NH0.25VPd_eTVEyqzBH3Tmfhrq9zcoaSPP4L7dbdKc8fhag
+#@codeName = Content
+
+
+### 회원 정보 조회
+### @GetMapping("/{userId}")
+#GET {{baseurl}}/{{userId}}
+GET {{ec2url}}/{{userId}}
+Authorization: Bearer {{token}}
+
+
+### 회원 정보 수정
+PATCH {{baseurl}}/{{userId}}
+Content-Type: application/json
+
+{
+
+  "ageDetailCodeId" : "1",
+  "gender" : "",
+  "profile" :  "https://i.namu.wiki/i/GQMqb8jtiqpCo6_US7jmWDO30KfPB2MMvbdURVub61Rs6ALKqbG-nUATj-wNk7bXXWIDjiLHJxWYkTELUgybkA.webp",
+  "time": "1000"
+}
+
+### 회원 로그아웃
+POST {{baseurl}}/{{userId}}
+

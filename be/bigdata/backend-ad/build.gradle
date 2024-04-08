@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Apache Spark Core
+    implementation 'org.apache.spark:spark-core_2.12:3.1.2'
+
+    // Apache Spark Streaming
+    implementation 'org.apache.spark:spark-streaming_2.12:3.1.2'
+
+    // Spark Streaming Kafka Connector
+    implementation 'org.apache.spark:spark-streaming-kafka-0-10_2.12:3.1.2'
+
+    // Kafka Clients (for Producer)
+    implementation 'org.apache.kafka:kafka-clients:2.8.0'
+
+    // PostgreSQL JDBC Driver
+    implementation 'org.postgresql:postgresql:42.7.2'
+
+    // HikariCP for Connection Pooling
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+}
+
+jar{
+    zip64 = true // 크기를 줄여줌
+    manifest {
+        attributes 'Main-Class': 'com.ms8.md.ad.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+test {
+    useJUnitPlatform()
+}

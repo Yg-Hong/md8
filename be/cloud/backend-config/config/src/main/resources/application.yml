@@ -1,0 +1,23 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/My-annual-salary-is-8-trillion-won/config.git
+          search-paths: config/**
+          username: hyeonjong-kim
+          password: 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
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true

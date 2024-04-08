@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: recommendation
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:http://j10a208.p.ssafy.io:8888

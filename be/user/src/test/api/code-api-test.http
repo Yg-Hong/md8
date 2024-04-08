@@ -1,0 +1,45 @@
+@baseurl = http://localhost:8090/api/codes
+@detailUrl = http://localhost:8090/api/detail-codes
+@codeId = 1
+@codeName = Content
+
+
+### 코드 목록 조회 getCodeList()
+GET {{baseurl}}
+
+### 코드 상세 조회 -> 코드ID로 검색
+GET {{baseurl}}/{{codeId}}
+
+### 코드 상세 조회 -> 코드명으로 검색
+GET {{baseurl}}/{{codeName}}
+
+### 코드 등록
+POST {{baseurl}}
+Content-Type: application/json
+
+{
+  "name" :  "Age",
+  "description" : "나이코드"
+}
+
+### 코드 수정 -> 코드ID
+PATCH {{baseurl}}/{{codeId}}
+Content-Type: application/json
+
+{
+  "name" :  "수정합니다잉",
+  "description" : "하십숍"
+}
+
+### 코드 삭제 -> 코드ID
+DELETE {{baseurl}}/{{codeId}}
+
+
+### 상세 코드 등록
+POST {{detailUrl}}/{{codeId}}
+Content-Type: application/json
+
+{
+  "name" : "10th",
+  "description" : "10대"
+}

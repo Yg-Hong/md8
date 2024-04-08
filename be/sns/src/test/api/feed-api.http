@@ -1,0 +1,21 @@
+@baseurl = http://localhost:8081/api/feeds
+@feedId = 3
+
+### 피드 생성
+POST {{baseurl}}
+Content-Type: application/json
+
+{
+  "userId" : "3",
+  "trackingId" : "1",
+  "content" : "new Data 222"
+
+}
+
+### 피드 상세 조회
+GET {{baseurl}}/{{feedId}}
+
+### 내 피드 조회
+@userId = 2
+GET {{baseurl}}/home/{{userId}}?lastFeedId=8
+
